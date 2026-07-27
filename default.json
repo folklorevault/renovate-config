@@ -38,6 +38,23 @@
       "allowedVersions": "<8.0.0"
     },
     {
+      "description": "Pin @portabletext/react to the v6 line. v7 moved to a client-only React context that leaks React.createContext into the Next RSC/server build ('createContext is not a function' collecting page data). Lift only as a deliberate upgrade once PortableText usage sits behind a 'use client' boundary. No-op in repos without it.",
+      "matchPackageNames": [
+        "@portabletext/react"
+      ],
+      "allowedVersions": "<7.0.0"
+    },
+    {
+      "description": "Cap the pnpm packageManager field to the v10 line. pnpm 11's resolution/hoisting changes have broken builds across several folklorevault sites; this stops Renovate re-bumping packageManager past 10. Renovate never downgrades, so repos already on 11 are untouched — moving a site onto 10 is a deliberate packageManager + mise edit in that repo. Pairs with constraints.pnpm above (which only governs Renovate's own lockfile regeneration).",
+      "matchDepTypes": [
+        "packageManager"
+      ],
+      "matchDepNames": [
+        "pnpm"
+      ],
+      "allowedVersions": "<11"
+    },
+    {
       "description": "Auto-merge low-risk updates once CI passes. Majors are still opened as PRs for manual review. Combined with the weekly schedule, routine minor/patch bumps land themselves without ever needing a click.",
       "matchUpdateTypes": [
         "minor",
