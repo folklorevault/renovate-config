@@ -4,6 +4,7 @@
   "extends": ["config:recommended", "group:allNonMajor", ":pinDevDependencies"],
   "timezone": "America/New_York",
   "schedule": ["before 5am on monday"],
+  "constraints": { "pnpm": "<11" },
   "minimumReleaseAge": "3 days",
   "internalChecksFilter": "strict",
   "packageRules": [
