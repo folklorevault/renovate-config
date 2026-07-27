@@ -10,9 +10,6 @@
   "schedule": [
     "before 5am on monday"
   ],
-  "constraints": {
-    "pnpm": "<11"
-  },
   "minimumReleaseAge": "3 days",
   "internalChecksFilter": "strict",
   "packageRules": [
@@ -45,7 +42,7 @@
       "allowedVersions": "<7.0.0"
     },
     {
-      "description": "Cap the pnpm packageManager field to the v10 line. pnpm 11's resolution/hoisting changes have broken builds across several folklorevault sites; this stops Renovate re-bumping packageManager past 10. Renovate never downgrades, so repos already on 11 are untouched — moving a site onto 10 is a deliberate packageManager + mise edit in that repo. Pairs with constraints.pnpm above (which only governs Renovate's own lockfile regeneration).",
+      "description": "Cap the pnpm packageManager field to the v10 line so Renovate never auto-migrates a repo from pnpm 10 to 11. Renovate never downgrades, so repos already pinned to pnpm 11 are untouched — moving a site onto 11 is a deliberate packageManager + mise edit in that repo. Lockfile regeneration follows each repo's own packageManager pin: there is deliberately NO global constraints.pnpm here, because a global pnpm constraint overrides the per-repo packageManager field and forced pnpm-11 repos to regenerate under pnpm 10, which resolved a duplicate React into the Next RSC server bundle and broke builds with 'createContext is not a function'.",
       "matchDepTypes": [
         "packageManager"
       ],
